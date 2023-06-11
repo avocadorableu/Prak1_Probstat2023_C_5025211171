@@ -7,19 +7,67 @@ Praktikum Modul 1 Probabilitas dan Statistik
   Jika kita asumsikan bahwa dalam satu hari di rumah sakit terdapat 10 kelahiran,
 </blockquote>
 
+```r
+x = 0:n
+n = 10
+p = 0.488
+```
+
 **A. Bagaimana pendistribusian banyak bayi laki-laki?**
+```r
+dbinom(x, n, p)
+```
+Distribusi Binomial. Diketahui n adalah jumlah percobaan sebanyak 10 dan p adalah probabilitas keberhasilannya adalah 0,44. Dalam penyelesaian ini digunakan fungsi **dbinom**. Fungsi dbinom adalah fungsi bawaan R untuk menghitung distribusi binomial. Hasil outputnya akan berupa vektor yang menunjukkan probabilitas masing-masing nilai dalam daftar k.
 
 **B. Probabilitas bahwa tepat tiga bayi di antaranya berjenis kelamin laki-laki?**
+```r
+x <- 3
+dist_binom <- dbinom(x, n, p)
+cat("Probabilitas tepat tiga bayi diantaranya laki-laki =", dist_binom)
+```
+Probabilitas mendapatkan tepat 3 bayi laki-laki dari 10 kelahiran dengan probabilitas keberhasilan 0.488. prob_tepat_tiga adalah nama variabel yang akan menampung hasil probabilitas dari fungsi distribusi binomial tersebut.
 
 **C. Probabilitas bahwa kurang dari tiga bayi di antaranya berjenis kelamin
 laki-laki?**
+```r
+x <- 2
+dist_binom <- pbinom(2, n, p)
+cat("Probabilitas kurang dari tiga bayi diantaranya laki-laki =", dist_binom)
+```
+Fungsi pbinom adalah fungsi distribusi binomial kumulatif yang akan fungsi distribusi binomial kumulatif yang akan menghitung probabilitas mendapatkan kurang dari atau sama dengan 2 bayi laki-laki dari 10 kelahiran dengan probabilitas keberhasilan 0.488. 
 
 **D. Probabilitas bahwa tiga atau lebih bayi di antaranya berjenis kelamin
 laki-laki?**
+```r
+x <- 2
+dist_binom <- 1-pbinom(2, n, p)
+cat("Probabilitas tiga atau lebih bayi diantaranya laki-laki =", dist_binom)
+```
+Rumus tersebut adalah rumus yang menghitung probabilitas mendapatkan lebih dari 2 bayi laki-laki dari 10 kelahiran dengan probabilitas keberhasilan 0.488. Dalam rumus ini, 1 menunjukkan probabilitas komplementer atau probabilitas kejadian yang saling melengkapi dari kejadian yang ingin dicari, yaitu kejadian mendapatkan lebih dari 2 bayi laki-laki, sedangkan pbinom(2, n, p) adalah probabilitas kejadian kurang dari atau sama dengan 2 bayi laki-laki.
 
 **E. Berapa nilai harapan dan simpangan baku banyak bayi laki-laki?**
+```r
+nilai_har <- mean <- n * p
+cat("Nilai harapan banyak bayi laki-laki =", nilai_har)
+
+simp_baku <- sd <- sqrt(n * p * (1 - p))
+cat("Simpangan baku banyak bayi laki-laki =", simp_baku)
+```
+Rumus **mean_laki_laki** <- n * p adalah rumus untuk menghitung rata-rata (mean) dari distribusi binomial, yang dihitung dengan mengalikan nilai n dengan nilai probabilitas keberhasilan p. Hasil perhitungan disimpan dalam variabel mean_laki_laki. Selain itu digunakan rumus sd_laki_laki <- sqrt(n * p * (1 - p)). 
 
 **F. Gambarkan histogram pendistribusian banyak bayi laki-laki.**
+```r
+set.seed(123)
+x <- 1000
+hist(rbinom(x, n, p), xlab = "Jumlah Bayi Laki-Laki", ylab = "Frekuensi",main = "Histogram Pendistribusian Banyak Bayi Laki-Laki")
+```
+* **kode R** untuk menghasilkan sampel acak dari distribusi binomial dengan parameter n dan p, dan menampilkan histogram dari sampel.
+* Fungsi set.seed()
+* **Fungsi set.seed()** menetapkan nilai awal untuk generator bilangan acak di dalam R, sehingga dengan nilai seed yang sama, pengguna akan mendapatkan hasil yang sama setiap kali kode tersebut dijalankan.
+* Variabel n dan p harus ditetapkan sebelumnya untuk menentukan parameter distribusi binomial yang ingin dihasilkan. Dalam hal ini, kita menghasilkan 1000 sampel acak dengan parameter n dan p yang sudah ditentukan sebelumnya, dan menyimpannya dalam variabel bayi_laki.
+* **Fungsi rbinom()** digunakan untuk menghasilkan sampel acak dari distribusi binomial dengan parameter n dan p yang ditentukan.
+* **Fungsi hist()** digunakan untuk memvisualisasikan distribusi sampel acak yang dihasilkan dalam bentuk histogram. Parameter breaks digunakan untuk menentukan interval batas pada sumbu x, sedangkan parameter main dan xlab digunakan untuk memberikan judul dan label sumbu pada grafik histogram tersebut.
+
 
 # Soal 2
 <blockquote>
